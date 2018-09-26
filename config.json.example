@@ -1,0 +1,6 @@
+{
+    "DEFAULT":{
+        "USERNAME": "username",
+        "PASSWORD": "twitch oauth token without 'oauth:'"
+    }
+}
