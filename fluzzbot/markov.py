@@ -7,10 +7,10 @@ class MarkovContainer(object):
 
     log = logging.getLogger(__name__)
     markov_order = 3
-
+    user_channel = ""
 
     def __init__(self, channel):
-
+        self.user_channel = channel
         self.log.info('Loading markov corpus for ' + channel)
         self.load_model_from_disk(channel)
 
@@ -32,10 +32,17 @@ class MarkovContainer(object):
                 file = open("./markov/" + channel + ".txt",'w+')
                 self.markov_model = markovify.Text("",state_size=self.markov_order)
 
+        self.log.info('Done loading markov corpus for ' + channel)
 
         
 
-
+    def add_message_to_corpus(self,message):
+        new_model = markovify.Text(message,state_size=self.markov_order)
+        model_union = markovify.combine([self.markov_model,new_model],[1,1])
+        self.markov_model = model_union
+        model_json = self.markov_model.to_json()
+        with open("./markov/" + self.user_channel + ".json",'w') as outfile:
+            outfile.write(model_json)
 
     def generate_markov_sentence(self):
         return self.markov_model.make_sentence()
