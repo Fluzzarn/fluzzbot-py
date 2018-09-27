@@ -1,6 +1,7 @@
 {
     "DEFAULT":{
         "USERNAME": "username",
-        "PASSWORD": "twitch oauth token without 'oauth:'"
+        "PASSWORD": "twitch oauth token without 'oauth:'",
+        "CHANNELS": ["channels","to join on"]
     }
 }
