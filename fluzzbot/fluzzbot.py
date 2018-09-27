@@ -4,9 +4,11 @@ import json
 import os
 import logging
 
+
 def main():
 
-
+    if not os.path.isdir('./markov'):
+        os.mkdir('./markov')
     logging.basicConfig(level=os.environ.get("LOGLEVEL","INFO"))
     config = configparser.ConfigParser()
     with open('config.json','r') as f:
